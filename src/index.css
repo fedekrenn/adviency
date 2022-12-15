@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Work+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Work Sans', sans-serif;
+    background-image: url('https://images.pexels.com/photos/10430806/pexels-photo-10430806.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+h1 {
+    font-family: 'Nerko One', cursive;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.box-section{
+    width: 300px;
+    padding: 20px;
+    margin: auto;
+    background-color: aliceblue;
+    text-align: center;
+}
+
+.gifts-container{
+    margin: 30px 0;
+}
+
+.thumb{
+    width: 50px;
+}
+
+.icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    color: rgb(126, 26, 26);
+    transition: .5s;
+}
+
+.add-product-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.receiver{
+    color: #726f6f;
+    margin: 3px 0;
+}
