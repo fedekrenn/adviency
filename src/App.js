@@ -1,25 +1,44 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Modal from './components/modal/Modal';
 import EditModal from './components/EditModal/EditModal';
+import Spinner from './components/Spinner/Spinner';
 
 import Button from '@mui/material/Button';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 
+
 function App() {
 
-  const [gifts, setGifts] = useState(JSON.parse(localStorage.getItem("gifts")) || []);
+  const [gifts, setGifts] = useState([]);
 
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-  
+
   const [idToEdit, setIdToEdit] = useState(0);
-  
+
+  const [loading, setLoading] = useState(true);
+
   const [giftName, setGiftName] = useState('');
   const [giftThumbnail, setGiftThumbnail] = useState('');
   const [giftQuantity, setGiftQuantity] = useState('');
   const [giftReceiver, setGiftReceiver] = useState('');
+
+  const apiGifts = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(JSON.parse(localStorage.getItem("gifts")) || [])
+    }, 2000)
+  })
+
+  useEffect(() => {
+    apiGifts.then((data) => {
+      setGifts(data)
+      setLoading(false)
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
 
   const addGift = () => {
 
@@ -103,56 +122,61 @@ function App() {
   return (
     <div className="box-section">
       <h1>Regalos</h1>
-
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Agregar Regalos
-      </Button>
-
-      <Modal
-        handleAdd={handleAdd}
-        setGiftName={setGiftName}
-        setGiftThumbnail={setGiftThumbnail}
-        setGiftQuantity={setGiftQuantity}
-        open={open}
-        handleClose={handleClose}
-        setGiftReceiver={setGiftReceiver}
-      />
-
-
-
-      {gifts.length === 0 ?
-        <h4 className='gifts-container'>Agrega un relago!</h4>
+      {loading ?
+        <Spinner />
         :
-        <div>
-          <ul className="gifts-container">
-            {gifts.map((gift) => (
-              <li key={gift.id}>
-                <img className='thumb' src={gift.thumbnail} alt={gift.name} />
-                <div>
-                  <h4>{gift.name} {gift.quantity > 1 && `X ${gift.quantity}`}</h4>
-                  <p className='receiver'>{gift.giftReceiver}</p>
-                </div>
-                <EditIcon className='icon' onClick={() => {
-                  setIdToEdit(gift.id)
-                  handleClickOpenEdit()
-                }} />
+        <>
+          <Button variant="outlined" onClick={handleClickOpen}>
+            Agregar Regalos
+          </Button>
+
+          <Modal
+            handleAdd={handleAdd}
+            setGiftName={setGiftName}
+            setGiftThumbnail={setGiftThumbnail}
+            setGiftQuantity={setGiftQuantity}
+            open={open}
+            handleClose={handleClose}
+            setGiftReceiver={setGiftReceiver}
+          />
 
 
-                {openEdit &&
-                  <EditModal
-                    openEdit={openEdit}
-                    handleClose={handleClose}
-                    gifts={gifts}
-                    handleEdit={handleEdit}
-                    idToEdit={idToEdit}
-                  />}
 
-                <DeleteForeverIcon className='icon' onClick={() => deleteGift(gift.id)} />
-              </li>
-            ))}
-          </ul>
-          <Button variant='outlined' onClick={deleteAll}>Eliminar todo</Button>
-        </div>
+          {gifts.length === 0 ?
+            <h4 className='gifts-container'>Agrega un relago!</h4>
+            :
+            <div>
+              <ul className="gifts-container">
+                {gifts.map((gift) => (
+                  <li key={gift.id}>
+                    <img className='thumb' src={gift.thumbnail} alt={gift.name} />
+                    <div>
+                      <h4>{gift.name} {gift.quantity > 1 && `X ${gift.quantity}`}</h4>
+                      <p className='receiver'>{gift.giftReceiver}</p>
+                    </div>
+                    <EditIcon className='icon' onClick={() => {
+                      setIdToEdit(gift.id)
+                      handleClickOpenEdit()
+                    }} />
+
+
+                    {openEdit &&
+                      <EditModal
+                        openEdit={openEdit}
+                        handleClose={handleClose}
+                        gifts={gifts}
+                        handleEdit={handleEdit}
+                        idToEdit={idToEdit}
+                      />}
+
+                    <DeleteForeverIcon className='icon' onClick={() => deleteGift(gift.id)} />
+                  </li>
+                ))}
+              </ul>
+              <Button variant='outlined' onClick={deleteAll}>Eliminar todo</Button>
+            </div>
+          }
+        </>
       }
     </div>
   );
