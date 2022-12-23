@@ -4,6 +4,8 @@ import Modal from './components/modal/Modal';
 import EditModal from './components/EditModal/EditModal';
 import Spinner from './components/Spinner/Spinner';
 
+import { faker } from '@faker-js/faker';
+
 import Button from '@mui/material/Button';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
@@ -62,6 +64,26 @@ function App() {
     setGifts([...gifts, newGift])
 
     localStorage.setItem("gifts", JSON.stringify([...gifts, newGift]))
+  }
+
+  const addRandomGift = () => {
+
+    const idArr = gifts.map(item => item.id)
+    const maxId = idArr.length === 0 ? 0 : Math.max(...idArr)
+
+    const newGift = {
+      id: maxId + 1,
+      name: faker.commerce.product(),
+      quantity: Math.floor(Math.random() * 10) + 1,
+      thumbnail: faker.image.image(200, 200, true),
+      giftReceiver: faker.name.firstName()
+    }
+
+    setGifts([...gifts, newGift])
+
+    localStorage.setItem("gifts", JSON.stringify([...gifts, newGift]))
+
+    handleClose();
   }
 
   const deleteGift = (id) => {
@@ -138,6 +160,7 @@ function App() {
             open={open}
             handleClose={handleClose}
             setGiftReceiver={setGiftReceiver}
+            addRandomGift={addRandomGift}
           />
 
 

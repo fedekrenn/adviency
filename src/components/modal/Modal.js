@@ -5,7 +5,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-const Modal = ({ handleAdd, setGiftName, setGiftThumbnail, setGiftQuantity, handleClose, open, setGiftReceiver }) => {
+const Modal = ({ handleAdd, setGiftName, setGiftThumbnail, setGiftQuantity, handleClose, open, setGiftReceiver, addRandomGift }) => {
 
     return (
         <Dialog open={open} onClose={handleClose}>
@@ -19,6 +19,7 @@ const Modal = ({ handleAdd, setGiftName, setGiftThumbnail, setGiftQuantity, hand
                 </form>
             </DialogContent>
             <DialogActions>
+                <Button onClick={addRandomGift}>Agregar aleatorio</Button>
                 <Button onClick={handleAdd}>Agregar</Button>
                 <Button onClick={handleClose}>Cancelar</Button>
             </DialogActions>
