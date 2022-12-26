@@ -26,6 +26,7 @@ function App() {
   const [giftThumbnail, setGiftThumbnail] = useState('');
   const [giftQuantity, setGiftQuantity] = useState('');
   const [giftReceiver, setGiftReceiver] = useState('');
+  const [giftPrice, setGiftPrice] = useState(0);
 
   const apiGifts = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -58,6 +59,7 @@ function App() {
       name: giftName,
       quantity: giftQuantity,
       thumbnail: giftThumbnail,
+      totalPrice: giftPrice * giftQuantity,
       giftReceiver: giftReceiver
     }
 
@@ -76,6 +78,7 @@ function App() {
       name: faker.commerce.product(),
       quantity: Math.floor(Math.random() * 10) + 1,
       thumbnail: faker.image.image(200, 200, true),
+      totalPrice: parseInt(Math.floor(Math.random() * 1000) + 1),
       giftReceiver: faker.name.firstName()
     }
 
@@ -118,7 +121,7 @@ function App() {
     handleClose();
   }
 
-  const handleEdit = (id, newName, newThumbnail, newQuantity, newReceiver) => {
+  const handleEdit = (id, newName, newThumbnail, newQuantity, newTotalPrice, newReceiver) => {
 
     const findGift = gifts.find(gift => gift.id === id)
 
@@ -127,6 +130,7 @@ function App() {
       name: newName,
       thumbnail: newThumbnail,
       quantity: newQuantity,
+      totalPrice: newTotalPrice * newQuantity,
       giftReceiver: newReceiver
     }
 
@@ -137,9 +141,7 @@ function App() {
     localStorage.setItem("gifts", JSON.stringify(updatedGifts))
 
     handleClose();
-
   }
-
 
   return (
     <div className="box-section">
@@ -161,6 +163,7 @@ function App() {
             handleClose={handleClose}
             setGiftReceiver={setGiftReceiver}
             addRandomGift={addRandomGift}
+            setGiftPrice={setGiftPrice}
           />
 
 
@@ -174,28 +177,30 @@ function App() {
                   <li key={gift.id}>
                     <img className='thumb' src={gift.thumbnail} alt={gift.name} />
                     <div>
-                      <h4>{gift.name} {gift.quantity > 1 && `X ${gift.quantity}`}</h4>
+                      <h4>{gift.name} {gift.quantity > 1 && `X ${gift.quantity}`} - ${gift.totalPrice}</h4>
                       <p className='receiver'>{gift.giftReceiver}</p>
                     </div>
-                    <EditIcon className='icon' onClick={() => {
-                      setIdToEdit(gift.id)
-                      handleClickOpenEdit()
-                    }} />
+                    <div className='buttons'>
+                      <EditIcon className='icon' onClick={() => {
+                        setIdToEdit(gift.id)
+                        handleClickOpenEdit()
+                      }} />
 
 
-                    {openEdit &&
-                      <EditModal
-                        openEdit={openEdit}
-                        handleClose={handleClose}
-                        gifts={gifts}
-                        handleEdit={handleEdit}
-                        idToEdit={idToEdit}
-                      />}
-
-                    <DeleteForeverIcon className='icon' onClick={() => deleteGift(gift.id)} />
+                      {openEdit &&
+                        <EditModal
+                          openEdit={openEdit}
+                          handleClose={handleClose}
+                          gifts={gifts}
+                          handleEdit={handleEdit}
+                          idToEdit={idToEdit}
+                        />}
+                      <DeleteForeverIcon className='icon' onClick={() => deleteGift(gift.id)} />
+                    </div>
                   </li>
                 ))}
               </ul>
+              <h4 className='total'>Total: ${gifts.reduce((acc, gift) => acc + gift.totalPrice, 0)}</h4>
               <Button variant='outlined' onClick={deleteAll}>Eliminar todo</Button>
             </div>
           }

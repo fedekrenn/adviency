@@ -38,10 +38,11 @@ h1 {
 }
 
 .box-section{
-    width: 300px;
+    width: 400px;
     padding: 20px;
     margin: auto;
     background-color: aliceblue;
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -70,4 +71,9 @@ h1 {
 .receiver{
     color: #726f6f;
     margin: 3px 0;
+}
+
+.total{
+    color: #726f6f;
+    margin: 5px 0;
 }

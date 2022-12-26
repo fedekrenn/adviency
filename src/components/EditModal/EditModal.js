@@ -14,10 +14,11 @@ const EditModal = ({ handleClose, openEdit, gifts, handleEdit, idToEdit }) => {
     const [changedName, setChangedName] = useState('')
     const [changedThumbnail, setChangedThumbnail] = useState('')
     const [changedQuantity, setChangedQuantity] = useState('')
+    const [cangedPrice, setChangedPrice] = useState('')
     const [changedGiftReceiver, setChangedGiftReceiver] = useState('')
 
     const handleEditGift = () => {
-        handleEdit(id, changedName, changedThumbnail, changedQuantity, changedGiftReceiver)
+        handleEdit(id, changedName, changedThumbnail, changedQuantity, cangedPrice, changedGiftReceiver)
         handleClose()
     }
 
@@ -27,6 +28,7 @@ const EditModal = ({ handleClose, openEdit, gifts, handleEdit, idToEdit }) => {
         setChangedName(giftToEdit.name)
         setChangedThumbnail(giftToEdit.thumbnail)
         setChangedQuantity(giftToEdit.quantity)
+        setChangedPrice(giftToEdit.totalPrice / giftToEdit.quantity)
         setChangedGiftReceiver(giftToEdit.giftReceiver)
         setId(giftToEdit.id)
 
@@ -42,6 +44,7 @@ const EditModal = ({ handleClose, openEdit, gifts, handleEdit, idToEdit }) => {
                     <TextField value={changedName} label="Nombre del regalo" onChange={(e) => setChangedName(e.target.value)} variant="standard" required />
                     <TextField value={changedThumbnail} type="url" label="Url de imagen" onChange={(e) => setChangedThumbnail(e.target.value)} variant="standard" required />
                     <TextField value={changedQuantity} type="number" label="Cantidad" onChange={(e) => setChangedQuantity(e.target.value)} variant="standard" required />
+                    <TextField value={cangedPrice} type="number" label="Precio" onChange={(e) => setChangedPrice(e.target.value)} variant="standard" required />
                     <TextField value={changedGiftReceiver} label="Para quien es?" onChange={(e) => setChangedGiftReceiver(e.target.value)} variant="standard" required />
                 </form>
             </DialogContent>
