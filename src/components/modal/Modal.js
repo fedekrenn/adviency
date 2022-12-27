@@ -5,7 +5,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-const Modal = ({ handleAdd, setGiftName, setGiftThumbnail, setGiftQuantity, setGiftPrice, handleClose, open, setGiftReceiver, addRandomGift }) => {
+const Modal = ({ addGift, setGiftName, setGiftThumbnail, setGiftQuantity, setGiftPrice, handleClose, open, setGiftReceiver, addRandomGift }) => {
 
     
 
@@ -23,7 +23,7 @@ const Modal = ({ handleAdd, setGiftName, setGiftThumbnail, setGiftQuantity, setG
             </DialogContent>
             <DialogActions>
                 <Button onClick={addRandomGift}>Agregar aleatorio</Button>
-                <Button onClick={handleAdd}>Agregar</Button>
+                <Button onClick={addGift}>Agregar</Button>
                 <Button onClick={handleClose}>Cancelar</Button>
             </DialogActions>
         </Dialog>

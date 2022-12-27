@@ -54,6 +54,10 @@ h1 {
     width: 50px;
 }
 
+.icon {
+    margin: 0 3px;
+}
+
 .icon:hover {
     cursor: pointer;
     transform: scale(1.1);

@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 
 import Modal from './components/modal/Modal';
 import EditModal from './components/EditModal/EditModal';
+import DuplicateModal from './components/DuplicateModal/DuplicateModal';
+
 import Spinner from './components/Spinner/Spinner';
+import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
 
 import { faker } from '@faker-js/faker';
 
@@ -17,6 +20,7 @@ function App() {
 
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openDuplicate, setOpenDuplicate] = useState(false);
 
   const [idToEdit, setIdToEdit] = useState(0);
 
@@ -48,8 +52,9 @@ function App() {
     if (giftName === "") return alert("El campo no puede estar vacío")
 
     const existentName = gifts.some(gift => gift.name.trim().toLowerCase() === giftName.toLowerCase())
+    const exitentReceiver = gifts.some(gift => gift.giftReceiver.trim().toLowerCase() === giftReceiver.toLowerCase())
 
-    if (existentName) return alert("Ese regalo ya existe")
+    if (existentName && exitentReceiver) return alert("Ese regalo ya existe para ese destinatario")
 
     const idArr = gifts.map(item => item.id)
     const maxId = idArr.length === 0 ? 0 : Math.max(...idArr)
@@ -66,6 +71,8 @@ function App() {
     setGifts([...gifts, newGift])
 
     localStorage.setItem("gifts", JSON.stringify([...gifts, newGift]))
+
+    handleClose();
   }
 
   const addRandomGift = () => {
@@ -111,15 +118,15 @@ function App() {
     setOpenEdit(true);
   };
 
+  const handleClickOpenDuplicate = () => {
+    setOpenDuplicate(true);
+  };
+
   const handleClose = () => {
     setOpen(false);
     setOpenEdit(false);
+    setOpenDuplicate(false);
   };
-
-  const handleAdd = () => {
-    addGift()
-    handleClose();
-  }
 
   const handleEdit = (id, newName, newThumbnail, newQuantity, newTotalPrice, newReceiver) => {
 
@@ -155,7 +162,7 @@ function App() {
           </Button>
 
           <Modal
-            handleAdd={handleAdd}
+            addGift={addGift}
             setGiftName={setGiftName}
             setGiftThumbnail={setGiftThumbnail}
             setGiftQuantity={setGiftQuantity}
@@ -165,8 +172,6 @@ function App() {
             addRandomGift={addRandomGift}
             setGiftPrice={setGiftPrice}
           />
-
-
 
           {gifts.length === 0 ?
             <h4 className='gifts-container'>Agrega un relago!</h4>
@@ -181,11 +186,11 @@ function App() {
                       <p className='receiver'>{gift.giftReceiver}</p>
                     </div>
                     <div className='buttons'>
+                      
                       <EditIcon className='icon' onClick={() => {
                         setIdToEdit(gift.id)
                         handleClickOpenEdit()
                       }} />
-
 
                       {openEdit &&
                         <EditModal
@@ -195,6 +200,33 @@ function App() {
                           handleEdit={handleEdit}
                           idToEdit={idToEdit}
                         />}
+
+                      <ControlPointDuplicateIcon className='icon' onClick={() => {
+                        setIdToEdit(gift.id)
+                        handleClickOpenDuplicate()
+                      }} />
+
+                      {openDuplicate &&
+                        <DuplicateModal
+                          openDuplicate={openDuplicate}
+                          handleClose={handleClose}
+                          gifts={gifts}
+                          idToEdit={idToEdit}
+
+                          setGiftName={setGiftName}
+                          setGiftThumbnail={setGiftThumbnail}
+                          setGiftQuantity={setGiftQuantity}
+                          setGiftReceiver={setGiftReceiver}
+                          setGiftPrice={setGiftPrice}
+                          addGift={addGift}
+
+                          giftName={giftName}
+                          giftThumbnail={giftThumbnail}
+                          giftQuantity={giftQuantity}
+                          giftReceiver={giftReceiver}
+                          giftPrice={giftPrice}
+                        />}
+
                       <DeleteForeverIcon className='icon' onClick={() => deleteGift(gift.id)} />
                     </div>
                   </li>
