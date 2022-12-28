@@ -37,7 +37,7 @@ h1 {
     margin: 1rem 0;
 }
 
-.box-section{
+.box-section {
     width: 400px;
     padding: 20px;
     margin: auto;
@@ -46,11 +46,11 @@ h1 {
     text-align: center;
 }
 
-.gifts-container{
+.gifts-container {
     margin: 30px 0;
 }
 
-.thumb{
+.thumb {
     width: 50px;
 }
 
@@ -65,19 +65,28 @@ h1 {
     transition: .5s;
 }
 
-.add-product-form{
+.add-product-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.receiver{
+.receiver {
     color: #726f6f;
     margin: 3px 0;
 }
 
-.total{
+.total {
     color: #726f6f;
     margin: 5px 0;
+}
+
+.preview-modal li {
+    width: 200px;
+    justify-content: flex-start
+}
+
+.preview-modal img {
+    margin-right: 20px;
 }

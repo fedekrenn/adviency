@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Modal from './components/modal/Modal';
 import EditModal from './components/EditModal/EditModal';
 import DuplicateModal from './components/DuplicateModal/DuplicateModal';
+import PreviewModal from './components/PreviewModal/PreviewModal';
 
 import Spinner from './components/Spinner/Spinner';
 import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
@@ -21,6 +22,7 @@ function App() {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDuplicate, setOpenDuplicate] = useState(false);
+  const [openPreview, setOpenPreview] = useState(false);
 
   const [idToEdit, setIdToEdit] = useState(0);
 
@@ -122,10 +124,15 @@ function App() {
     setOpenDuplicate(true);
   };
 
+  const handleClickOpenPreview = () => {
+    setOpenPreview(true);
+  };
+
   const handleClose = () => {
     setOpen(false);
     setOpenEdit(false);
     setOpenDuplicate(false);
+    setOpenPreview(false);
   };
 
   const handleEdit = (id, newName, newThumbnail, newQuantity, newTotalPrice, newReceiver) => {
@@ -186,7 +193,7 @@ function App() {
                       <p className='receiver'>{gift.giftReceiver}</p>
                     </div>
                     <div className='buttons'>
-                      
+
                       <EditIcon className='icon' onClick={() => {
                         setIdToEdit(gift.id)
                         handleClickOpenEdit()
@@ -234,6 +241,15 @@ function App() {
               </ul>
               <h4 className='total'>Total: ${gifts.reduce((acc, gift) => acc + gift.totalPrice, 0)}</h4>
               <Button variant='outlined' onClick={deleteAll}>Eliminar todo</Button>
+              <Button variant='outlined' onClick={handleClickOpenPreview}>Previsualizar</Button>
+
+              {openPreview &&
+                <PreviewModal
+                  openPreview={openPreview}
+                  handleClose={handleClose}
+                  gifts={gifts}
+                />
+              }
             </div>
           }
         </>

@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 
 const Modal = ({ addGift, setGiftName, setGiftThumbnail, setGiftQuantity, setGiftPrice, handleClose, open, setGiftReceiver, addRandomGift }) => {
 
-    
+
 
     return (
         <Dialog open={open} onClose={handleClose}>
