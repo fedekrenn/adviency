@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -5,11 +7,20 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 // import TextField from '@mui/material/TextField';
 
-const PreviewModal = ({openPreview, handleClose, gifts}) => {
+const PreviewModal = ({ openPreview, handleClose, gifts }) => {
+
+    const [showButton, setShowButton] = useState(true)
+
+    const handlePrint = () => {
+        setShowButton(!showButton)
+        setTimeout(() => {
+            window.print()
+            handleClose()
+        }, 100)
+    }
 
     return (
-        
-        <Dialog open={openPreview} onClose={handleClose}> 
+        <Dialog open={openPreview} onClose={handleClose}>
             <DialogTitle>Lista de regalos</DialogTitle>
             <DialogContent className='preview-modal'>
 
@@ -25,7 +36,8 @@ const PreviewModal = ({openPreview, handleClose, gifts}) => {
 
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose}>Cerrar</Button>
+                <Button className={showButton ? '' : 'hide-btn'} onClick={handleClose}>Cerrar</Button>
+                <Button className={showButton ? '' : 'hide-btn'} onClick={handlePrint}>Imprimir</Button>
             </DialogActions>
         </Dialog>
     )
