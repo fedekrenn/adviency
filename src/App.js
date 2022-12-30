@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import Modal from './components/modal/Modal';
 import EditModal from './components/EditModal/EditModal';
 import DuplicateModal from './components/DuplicateModal/DuplicateModal';
 import PreviewModal from './components/PreviewModal/PreviewModal';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
 import Spinner from './components/Spinner/Spinner';
 import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
@@ -28,11 +30,15 @@ function App() {
 
   const [loading, setLoading] = useState(true);
 
+  const [soundIcon, setSoundIcon] = useState(true);
+
   const [giftName, setGiftName] = useState('');
   const [giftThumbnail, setGiftThumbnail] = useState('');
   const [giftQuantity, setGiftQuantity] = useState('');
   const [giftReceiver, setGiftReceiver] = useState('');
   const [giftPrice, setGiftPrice] = useState(0);
+
+  const audioRef = useRef();
 
   const apiGifts = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -157,9 +163,28 @@ function App() {
     handleClose();
   }
 
+  const handleSong = () => {
+    audioRef.current.play()
+
+    audioRef.current.volume = 0.08
+    audioRef.current.autoplay = true
+    audioRef.current.muted = !audioRef.current.muted
+
+    setSoundIcon(!soundIcon)
+  }
+
   return (
     <div className="box-section">
       <h1>Regalos</h1>
+
+      {soundIcon ?
+        <VolumeUpIcon className='icon volume-icon' onClick={handleSong} />
+        :
+        <VolumeOffIcon className='icon volume-icon' onClick={handleSong} />
+      }
+
+      <audio ref={audioRef} src='./song/navidad.mp3' autoPlay loop muted></audio>
+
       {loading ?
         <Spinner />
         :

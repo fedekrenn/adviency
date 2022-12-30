@@ -44,6 +44,7 @@ h1 {
     background-color: aliceblue;
     border-radius: 10px;
     text-align: center;
+    position: relative;
 }
 
 .gifts-container {
@@ -63,6 +64,12 @@ h1 {
     transform: scale(1.1);
     color: rgb(126, 26, 26);
     transition: .5s;
+}
+
+.volume-icon{
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }
 
 .add-product-form {
