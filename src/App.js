@@ -12,6 +12,9 @@ import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate
 
 import { faker } from '@faker-js/faker';
 
+import Swal from 'sweetalert2'
+import Snowfall from 'react-snowfall'
+
 import Button from '@mui/material/Button';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
@@ -174,112 +177,115 @@ function App() {
   }
 
   return (
-    <div className="box-section">
-      <h1>Regalos</h1>
+    <>
+      <Snowfall style={{zIndex: 1}}/>
+      <div className="box-section">
+        <h1>Regalos</h1>
 
-      {soundIcon ?
-        <VolumeUpIcon className='icon volume-icon' onClick={handleSong} />
-        :
-        <VolumeOffIcon className='icon volume-icon' onClick={handleSong} />
-      }
+        {soundIcon ?
+          <VolumeUpIcon className='icon volume-icon' onClick={handleSong} />
+          :
+          <VolumeOffIcon className='icon volume-icon' onClick={handleSong} />
+        }
 
-      <audio ref={audioRef} src='./song/navidad.mp3' autoPlay loop muted></audio>
+        <audio ref={audioRef} src='./song/navidad.mp3' autoPlay loop muted></audio>
 
-      {loading ?
-        <Spinner />
-        :
-        <>
-          <Button variant="outlined" onClick={handleClickOpen}>
-            Agregar Regalos
-          </Button>
+        {loading ?
+          <Spinner />
+          :
+          <>
+            <Button variant="outlined" onClick={handleClickOpen}>
+              Agregar Regalos
+            </Button>
 
-          <Modal
-            addGift={addGift}
-            setGiftName={setGiftName}
-            setGiftThumbnail={setGiftThumbnail}
-            setGiftQuantity={setGiftQuantity}
-            open={open}
-            handleClose={handleClose}
-            setGiftReceiver={setGiftReceiver}
-            addRandomGift={addRandomGift}
-            setGiftPrice={setGiftPrice}
-          />
+            <Modal
+              addGift={addGift}
+              setGiftName={setGiftName}
+              setGiftThumbnail={setGiftThumbnail}
+              setGiftQuantity={setGiftQuantity}
+              open={open}
+              handleClose={handleClose}
+              setGiftReceiver={setGiftReceiver}
+              addRandomGift={addRandomGift}
+              setGiftPrice={setGiftPrice}
+            />
 
-          {gifts.length === 0 ?
-            <h4 className='gifts-container'>Agrega un relago!</h4>
-            :
-            <div>
-              <ul className="gifts-container">
-                {gifts.map((gift) => (
-                  <li key={gift.id}>
-                    <img className='thumb' src={gift.thumbnail} alt={gift.name} />
-                    <div>
-                      <h4>{gift.name} {gift.quantity > 1 && `X ${gift.quantity}`} - ${gift.totalPrice}</h4>
-                      <p className='receiver'>{gift.giftReceiver}</p>
-                    </div>
-                    <div className='buttons'>
+            {gifts.length === 0 ?
+              <h4 className='gifts-container'>Agrega un relago!</h4>
+              :
+              <div>
+                <ul className="gifts-container">
+                  {gifts.map((gift) => (
+                    <li key={gift.id}>
+                      <img className='thumb' src={gift.thumbnail} alt={gift.name} />
+                      <div>
+                        <h4>{gift.name} {gift.quantity > 1 && `X ${gift.quantity}`} - ${gift.totalPrice}</h4>
+                        <p className='receiver'>{gift.giftReceiver}</p>
+                      </div>
+                      <div className='buttons'>
 
-                      <EditIcon className='icon' onClick={() => {
-                        setIdToEdit(gift.id)
-                        handleClickOpenEdit()
-                      }} />
+                        <EditIcon className='icon' onClick={() => {
+                          setIdToEdit(gift.id)
+                          handleClickOpenEdit()
+                        }} />
 
-                      {openEdit &&
-                        <EditModal
-                          openEdit={openEdit}
-                          handleClose={handleClose}
-                          gifts={gifts}
-                          handleEdit={handleEdit}
-                          idToEdit={idToEdit}
-                        />}
+                        {openEdit &&
+                          <EditModal
+                            openEdit={openEdit}
+                            handleClose={handleClose}
+                            gifts={gifts}
+                            handleEdit={handleEdit}
+                            idToEdit={idToEdit}
+                          />}
 
-                      <ControlPointDuplicateIcon className='icon' onClick={() => {
-                        setIdToEdit(gift.id)
-                        handleClickOpenDuplicate()
-                      }} />
+                        <ControlPointDuplicateIcon className='icon' onClick={() => {
+                          setIdToEdit(gift.id)
+                          handleClickOpenDuplicate()
+                        }} />
 
-                      {openDuplicate &&
-                        <DuplicateModal
-                          openDuplicate={openDuplicate}
-                          handleClose={handleClose}
-                          gifts={gifts}
-                          idToEdit={idToEdit}
+                        {openDuplicate &&
+                          <DuplicateModal
+                            openDuplicate={openDuplicate}
+                            handleClose={handleClose}
+                            gifts={gifts}
+                            idToEdit={idToEdit}
 
-                          setGiftName={setGiftName}
-                          setGiftThumbnail={setGiftThumbnail}
-                          setGiftQuantity={setGiftQuantity}
-                          setGiftReceiver={setGiftReceiver}
-                          setGiftPrice={setGiftPrice}
-                          addGift={addGift}
+                            setGiftName={setGiftName}
+                            setGiftThumbnail={setGiftThumbnail}
+                            setGiftQuantity={setGiftQuantity}
+                            setGiftReceiver={setGiftReceiver}
+                            setGiftPrice={setGiftPrice}
+                            addGift={addGift}
 
-                          giftName={giftName}
-                          giftThumbnail={giftThumbnail}
-                          giftQuantity={giftQuantity}
-                          giftReceiver={giftReceiver}
-                          giftPrice={giftPrice}
-                        />}
+                            giftName={giftName}
+                            giftThumbnail={giftThumbnail}
+                            giftQuantity={giftQuantity}
+                            giftReceiver={giftReceiver}
+                            giftPrice={giftPrice}
+                          />}
 
-                      <DeleteForeverIcon className='icon' onClick={() => deleteGift(gift.id)} />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <h4 className='total'>Total: ${gifts.reduce((acc, gift) => acc + gift.totalPrice, 0)}</h4>
-              <Button variant='outlined' onClick={deleteAll}>Eliminar todo</Button>
-              <Button variant='outlined' onClick={handleClickOpenPreview}>Previsualizar</Button>
+                        <DeleteForeverIcon className='icon' onClick={() => deleteGift(gift.id)} />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <h4 className='total'>Total: ${gifts.reduce((acc, gift) => acc + gift.totalPrice, 0)}</h4>
+                <Button variant='outlined' onClick={deleteAll}>Eliminar todo</Button>
+                <Button variant='outlined' onClick={handleClickOpenPreview}>Previsualizar</Button>
 
-              {openPreview &&
-                <PreviewModal
-                  openPreview={openPreview}
-                  handleClose={handleClose}
-                  gifts={gifts}
-                />
-              }
-            </div>
-          }
-        </>
-      }
-    </div>
+                {openPreview &&
+                  <PreviewModal
+                    openPreview={openPreview}
+                    handleClose={handleClose}
+                    gifts={gifts}
+                  />
+                }
+              </div>
+            }
+          </>
+        }
+      </div>
+    </>
   );
 }
 

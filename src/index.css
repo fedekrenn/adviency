@@ -8,14 +8,14 @@
 
 body {
     font-family: 'Work Sans', sans-serif;
-    background-image: url('https://images.pexels.com/photos/10430806/pexels-photo-10430806.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-image: url('../public/img/fondo-navidad.jpg');
     background-size: cover;
+    background-position-y: 50%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 ul {
@@ -41,8 +41,9 @@ h1 {
     width: 400px;
     padding: 20px;
     margin: auto;
-    background-color: aliceblue;
+    background-color: rgb(221, 223, 221);
     border-radius: 10px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
     position: relative;
 }
