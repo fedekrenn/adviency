@@ -22,9 +22,9 @@ const Modal = ({ addGift, setGiftName, setGiftThumbnail, setGiftQuantity, setGif
                 </form>
             </DialogContent>
             <DialogActions>
-                <Button onClick={addRandomGift}>Agregar aleatorio</Button>
-                <Button onClick={addGift}>Agregar</Button>
-                <Button onClick={handleClose}>Cancelar</Button>
+                <Button color='error' variant='text' onClick={addRandomGift}>Agregar aleatorio</Button>
+                <Button color='error' variant='text' onClick={addGift}>Agregar</Button>
+                <Button color='error' variant='text' onClick={handleClose}>Cancelar</Button>
             </DialogActions>
         </Dialog>
     )

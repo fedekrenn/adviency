@@ -12,7 +12,6 @@ import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate
 
 import { faker } from '@faker-js/faker';
 
-import Swal from 'sweetalert2'
 import Snowfall from 'react-snowfall'
 
 import Button from '@mui/material/Button';
@@ -178,7 +177,7 @@ function App() {
 
   return (
     <>
-      <Snowfall style={{zIndex: 1}}/>
+      <Snowfall style={{ zIndex: 1 }} />
       <div className="box-section">
         <h1>Regalos</h1>
 
@@ -194,7 +193,7 @@ function App() {
           <Spinner />
           :
           <>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="contained" color='error' onClick={handleClickOpen}>
               Agregar Regalos
             </Button>
 
@@ -270,8 +269,10 @@ function App() {
                   ))}
                 </ul>
                 <h4 className='total'>Total: ${gifts.reduce((acc, gift) => acc + gift.totalPrice, 0)}</h4>
-                <Button variant='outlined' onClick={deleteAll}>Eliminar todo</Button>
-                <Button variant='outlined' onClick={handleClickOpenPreview}>Previsualizar</Button>
+                <div className='buttons-buttom'>
+                  <Button color='error' variant='text' onClick={deleteAll}>Eliminar todo</Button>
+                  <Button color='error' variant='text' onClick={handleClickOpenPreview}>Previsualizar</Button>
+                </div>
 
                 {openPreview &&
                   <PreviewModal

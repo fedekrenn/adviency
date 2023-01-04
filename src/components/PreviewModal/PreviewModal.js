@@ -36,8 +36,8 @@ const PreviewModal = ({ openPreview, handleClose, gifts }) => {
 
             </DialogContent>
             <DialogActions>
-                <Button className={showButton ? '' : 'hide-btn'} onClick={handleClose}>Cerrar</Button>
-                <Button className={showButton ? '' : 'hide-btn'} onClick={handlePrint}>Imprimir</Button>
+                <Button color='error' className={showButton ? '' : 'hide-btn'} onClick={handleClose}>Cerrar</Button>
+                <Button color='error' className={showButton ? '' : 'hide-btn'} onClick={handlePrint}>Imprimir</Button>
             </DialogActions>
         </Dialog>
     )

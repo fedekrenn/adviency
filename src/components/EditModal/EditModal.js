@@ -49,8 +49,8 @@ const EditModal = ({ handleClose, openEdit, gifts, handleEdit, idToEdit }) => {
                 </form>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleEditGift}>Aplicar cambios</Button>
-                <Button onClick={handleClose}>Cancelar</Button>
+                <Button color='error' variant='text' onClick={handleEditGift}>Aplicar cambios</Button>
+                <Button color='error' variant='text' onClick={handleClose}>Cancelar</Button>
             </DialogActions>
         </Dialog>
     )

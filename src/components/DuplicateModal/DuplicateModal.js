@@ -49,8 +49,8 @@ const DuplicateModal = ({ openDuplicate,
                 </form>
             </DialogContent>
             <DialogActions>
-                <Button onClick={addGift}>Duplicar</Button>
-                <Button onClick={handleClose}>Cancelar</Button>
+                <Button color='error' variant='text' onClick={addGift}>Duplicar</Button>
+                <Button color='error' variant='text' onClick={handleClose}>Cancelar</Button>
             </DialogActions>
         </Dialog>
     )
