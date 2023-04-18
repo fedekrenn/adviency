@@ -28,7 +28,7 @@ const EditModal = ({ handleClose, openEdit, gifts, handleEdit, idToEdit }) => {
         setChangedName(giftToEdit.name)
         setChangedThumbnail(giftToEdit.thumbnail)
         setChangedQuantity(giftToEdit.quantity)
-        setChangedPrice(giftToEdit.totalPrice / giftToEdit.quantity)
+        setChangedPrice((giftToEdit.totalPrice / giftToEdit.quantity).toFixed(2))
         setChangedGiftReceiver(giftToEdit.giftReceiver)
         setId(giftToEdit.id)
 

@@ -68,6 +68,10 @@ svg.icon {
     transition: .5s;
 }
 
+.inline-div{
+    display: inline;
+}
+
 .volume-icon {
     position: absolute;
     top: 15px;
