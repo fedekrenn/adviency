@@ -1,131 +1,130 @@
-@import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Work+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nerko+One&family=Work+Sans:ital,wght@0,400;0,700;1,400&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Work Sans', sans-serif;
-    background-image: url('../public/img/fondo-navidad.jpg');
-    background-size: cover;
-    background-position-y: 50%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  font-family: "Work Sans", sans-serif;
+  background-image: url("../public/img/fondo-navidad.jpg");
+  background-size: cover;
+  background-position-y: 50%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
 }
 
 h1 {
-    font-family: 'Nerko One', cursive;
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
-    margin: 1rem 0;
+  font-family: "Nerko One", cursive;
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  margin: 1rem 0;
 }
 
 .box-section {
-    width: 400px;
-    padding: 20px;
-    margin: auto;
-    background-color: rgb(221, 223, 221);
-    border-radius: 10px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-    text-align: center;
-    position: relative;
+  width: 400px;
+  padding: 20px;
+  margin: auto;
+  background-color: rgb(221, 223, 221);
+  border-radius: 10px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
 }
 
 .gifts-container {
-    margin: 30px 0;
+  margin: 30px 0;
 }
 
 .thumb {
-    width: 50px;
+  width: 50px;
 }
 
 svg.icon {
-    margin: 0 3px;
-    font-size: 1.2em;
+  margin: 0 3px;
+  font-size: 1.2em;
 }
 
 .icon:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-    color: rgb(126, 26, 26);
-    transition: .5s;
+  cursor: pointer;
+  transform: scale(1.1);
+  color: rgb(126, 26, 26);
+  transition: 0.5s;
 }
 
-.inline-div{
-    display: inline;
+.inline-div {
+  display: inline;
 }
 
 .volume-icon {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .add-product-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .receiver {
-    color: #726f6f;
-    margin: 3px 0;
+  color: #726f6f;
+  margin: 3px 0;
 }
 
 .total {
-    color: #726f6f;
-    margin: 5px 0;
+  color: #726f6f;
+  margin: 5px 0;
 }
 
 .preview-modal li {
-    width: 200px;
-    justify-content: flex-start
+  width: 200px;
+  justify-content: flex-start;
 }
 
 .preview-modal img {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .hide-btn {
-    display: none !important;
+  display: none !important;
 }
 
 .buttons-buttom {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 768px) {
-    .box-section {
-        width: 300px;
-        margin: 20px 0;
-    }
+  .box-section {
+    width: 300px;
+    margin: 20px 0;
+  }
 
-    .gifts-container li{
-        flex-direction: column;
-        margin: 20px 0;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-    }
+  .gifts-container li {
+    flex-direction: column;
+    margin: 20px 0;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  }
 
-    .gifts-container li > * {
-        margin: 5px 0;
-    }
+  .gifts-container li > * {
+    margin: 5px 0;
+  }
 }
-
